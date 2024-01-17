@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "39957768918",
+    "firebase_url": "https://aristo-e16ab-default-rtdb.firebaseio.com",
+    "project_id": "aristo-e16ab",
+    "storage_bucket": "aristo-e16ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39957768918:android:6552f483c28300820a7777",
+        "android_client_info": {
+          "package_name": "com.aristo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr2xK_sh5qjFOLVI9Vovs36dBT31m_PyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39957768918:android:fe15bdb79c05e5a60a7777",
+        "android_client_info": {
+          "package_name": "com.aristo.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr2xK_sh5qjFOLVI9Vovs36dBT31m_PyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
