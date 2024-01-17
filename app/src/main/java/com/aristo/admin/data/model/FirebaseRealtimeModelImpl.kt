@@ -1,7 +1,5 @@
 package com.aristo.admin.data.model
 
-import android.app.Activity
-import android.content.Context
 import android.net.Uri
 import com.aristo.admin.data.vos.AdminVO
 import com.aristo.admin.data.vos.CategoryVO
@@ -11,20 +9,18 @@ import com.aristo.admin.data.vos.UserVO
 object FirebaseRealtimeModelImpl : AbstractBaseModel(), FirebaseRealtimeModel {
 
     override fun uploadDataToFirebase(
-        context: Context,
         categoryVO: CategoryVO,
         completionHandler: (Boolean, String?) -> Unit
     ) {
-        mFirebaseRealtimeApi.uploadDataToFirebase(context, categoryVO, completionHandler)
+        mFirebaseRealtimeApi.uploadDataToFirebase(categoryVO, completionHandler)
     }
 
     override fun updateDataToFirebase(
-        activity: Activity,
         categoryVO: CategoryVO,
         isWithImage: Boolean,
         completionHandler: (Boolean, String?) -> Unit
     ) {
-        mFirebaseRealtimeApi.updateDataToFirebase(activity, categoryVO, isWithImage, completionHandler)
+        mFirebaseRealtimeApi.updateDataToFirebase(categoryVO, isWithImage, completionHandler)
     }
 
     override fun uploadImageToFirebase(
@@ -40,11 +36,10 @@ object FirebaseRealtimeModelImpl : AbstractBaseModel(), FirebaseRealtimeModel {
         mFirebaseRealtimeApi.getMainCategoryData(completionHandler)
     }
 
-    override fun getCategoriesDatas(
-        activity: Activity,
+    override fun getCategoriesData(
         completionHandler: (Boolean, ArrayList<CategoryVO>?) -> Unit
     ) {
-        mFirebaseRealtimeApi.getCategoriesDatas(activity, completionHandler)
+        mFirebaseRealtimeApi.getCategoriesData(completionHandler)
     }
 
     override fun addAdmin(

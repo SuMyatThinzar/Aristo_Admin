@@ -14,12 +14,13 @@ import com.aristo.admin.R
 import com.aristo.admin.databinding.ActivityAddSubCategoryDetailBinding
 import com.aristo.admin.data.vos.CategoryVO
 import com.aristo.admin.data.vos.NewProductVO
+import com.aristo.admin.utils.components.SharedPreferencesManager
 import com.aristo.admin.view.AbstractBaseActivity
 import com.bumptech.glide.Glide
 
 class AddSubCategoryDetailActivity : AbstractBaseActivity(){
 
-    private val binding by lazy {ActivityAddSubCategoryDetailBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityAddSubCategoryDetailBinding.inflate(layoutInflater) }
 
     lateinit var categoryVO : CategoryVO
     lateinit var title : String
@@ -203,7 +204,8 @@ class AddSubCategoryDetailActivity : AbstractBaseActivity(){
         } else {
             categoryVO = CategoryVO(title = title, price = price, imageURL = selectedImageUri.toString(), new = isNew, colorCode = colorCode, type = type, subCategories = mapOf())
 
-            mFirebaseRealtimeModel.updateDataToFirebase(this@AddSubCategoryDetailActivity, categoryVO, isWithImage) { isSuccess, errorMessage ->
+            SharedPreferencesManager.initialize(this)
+            mFirebaseRealtimeModel.updateDataToFirebase(categoryVO, isWithImage) { isSuccess, errorMessage ->
 
                 if (isSuccess) {
                 Toast.makeText(this, "Data added successfully", Toast.LENGTH_LONG).show()

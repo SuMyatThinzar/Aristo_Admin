@@ -1,10 +1,7 @@
 package com.aristo.admin.network
 
-import android.app.Activity
-import android.content.Context
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import androidx.core.net.toUri
 import com.aristo.admin.data.dataholders.AdminDataHolder
 import com.aristo.admin.data.dataholders.CategoryDataHolder
@@ -28,9 +25,8 @@ class FirebaseRealtimeApi {
         private val categoriesRef: DatabaseReference = database.getReference("Products")
         private var referencePathUpDateData = "Products/Categories/"
         
-        fun uploadDataToFirebase(context: Context, categoryVO: CategoryVO, completionHandler: (Boolean, String?) -> Unit) {
+        fun uploadDataToFirebase(categoryVO: CategoryVO, completionHandler: (Boolean, String?) -> Unit) {
 
-            SharedPreferencesManager.initialize(context)
             val categoryId = categoriesRef.push().key
             SharedPreferencesManager.saveCategoryId(categoryId!!)
             categoryVO.id = categoryId
@@ -54,16 +50,14 @@ class FirebaseRealtimeApi {
                             }
                         }
                 } else {
-                    //Toast.makeText(context,"Please select one image.",Toast.LENGTH_LONG).show()
                     completionHandler(false, imageUrl) // Failure, pass false and the error message
                 }
             }
         }
 
-        fun updateDataToFirebase(activity: Activity, categoryVO : CategoryVO, isWithImage : Boolean, completionHandler: (Boolean, String?) -> Unit){
+        fun updateDataToFirebase(categoryVO : CategoryVO, isWithImage : Boolean, completionHandler: (Boolean, String?) -> Unit){
 
             var subCategoryId : String?
-            SharedPreferencesManager.initialize(activity)
             var categoryId = SharedPreferencesManager.getCategoryId()
 
             if (DataListHolder.getInstance().getSubIDList().isEmpty()){
@@ -115,7 +109,6 @@ class FirebaseRealtimeApi {
                         }
 
                     } else {
-                        Toast.makeText(activity,"Please select one image.",Toast.LENGTH_LONG).show()
                         completionHandler(false, imageUrl) // Failure, pass false and the error message
                     }
                 }
@@ -188,9 +181,8 @@ class FirebaseRealtimeApi {
             })
         }
 
-        fun getCategoriesDatas(activity: Activity,completionHandler: (Boolean, ArrayList<CategoryVO>?) -> Unit){
+        fun getCategoriesData(completionHandler: (Boolean, ArrayList<CategoryVO>?) -> Unit){
 
-            SharedPreferencesManager.initialize(activity)
             var mainCatID = SharedPreferencesManager.getCategoryId()
             var baseURL = mainCatID?.let {
                 categoriesRef.child("Categories").child(it)

@@ -48,11 +48,9 @@ class CreateSubCategoryActivity : AbstractBaseActivity(){
         super.onResume()
 
         binding.subLoading.visibility = View.VISIBLE
+        SharedPreferencesManager.initialize(this)
 
-        mFirebaseRealtimeModel.getCategoriesDatas(this) { isSuccess, data ->
-
-            binding.subLoading.visibility = View.GONE
-
+        mFirebaseRealtimeModel.getCategoriesData { isSuccess, data ->
             if (isSuccess) {
                 if (data != null) {
 
@@ -61,6 +59,7 @@ class CreateSubCategoryActivity : AbstractBaseActivity(){
             } else {
                 Toast.makeText(this, "Can't retrieve datas.", Toast.LENGTH_LONG).show()
             }
+            binding.subLoading.visibility = View.GONE
         }
     }
     private fun setRecyclerViewAdapter() {
@@ -71,7 +70,6 @@ class CreateSubCategoryActivity : AbstractBaseActivity(){
 
     override fun onBackPressed() {
         super.onBackPressed()
-
         removeIndex()
     }
 

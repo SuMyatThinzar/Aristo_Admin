@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.ActivityResultCallback
 import com.aristo.admin.databinding.ActivityAddMainCategoryDetailBinding
 import com.aristo.admin.data.vos.CategoryVO
+import com.aristo.admin.utils.components.SharedPreferencesManager
 import com.aristo.admin.view.AbstractBaseActivity
 
 class AddMainCategoryDetailActivity : AbstractBaseActivity() {
@@ -76,8 +77,9 @@ class AddMainCategoryDetailActivity : AbstractBaseActivity() {
         // Create a new Category object
         val categoryVO = CategoryVO(title = binding.etTitle.text.toString(), price = 0, imageURL = selectedImageUri.toString(), new = false, subCategories = mapOf())
 
+        SharedPreferencesManager.initialize(this)
         // Upload the category data to Firebase
-        mFirebaseRealtimeModel.uploadDataToFirebase(this, categoryVO) { isSuccess, errorMessage ->
+        mFirebaseRealtimeModel.uploadDataToFirebase(categoryVO) { isSuccess, errorMessage ->
             if (isSuccess) {
                 Toast.makeText(this, "Data added successfully", Toast.LENGTH_LONG).show()
                 binding.loading.visibility = View.GONE
